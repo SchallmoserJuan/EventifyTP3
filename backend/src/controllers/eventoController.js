@@ -5,6 +5,7 @@ const pickEventoPayload = (body) => ({
   descripcion: body.descripcion,
   fecha: body.fecha,
   lugar: body.lugar,
+  cliente: body.cliente,
   activo: body.activo !== undefined ? body.activo : true,
 });
 
