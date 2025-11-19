@@ -50,6 +50,24 @@ VITE_API_URL=http://localhost:4000/api
 | `cd backend && npm run dev` | Arranca Express + MongoDB |
 | `cd backend && npm run seed` | Ejecuta el seed existente (opcional) |
 | `cd backend && npm test`     | Corre pruebas Jest (usa MongoDB en memoria) |
+
+### Testing
+
+Se añadió una prueba de integración básica en `backend/tests/auth.test.js` utilizando **Jest**, **Supertest** y **mongodb-memory-server**. El flujo verificado es:
+
+1. Registro de usuario (`POST /api/auth/register`).
+2. Login con las credenciales recién creadas (`POST /api/auth/login`).
+3. Consulta del perfil autenticado (`GET /api/auth/me`) enviando el JWT recibido.
+
+La prueba levanta una base MongoDB en memoria, por lo que no requiere datos reales y se ejecuta de manera determinista. Para correrla:
+
+```bash
+cd backend
+npm install        # si aún no instalaste devDependencies
+npm test
+```
+
+Esto deja documentado el uso de prácticas de testing vistas en clase (Jest) y respalda el correcto funcionamiento del flujo de autenticación.
 | `cd frontend && npm install` | Instala dependencias del cliente |
 | `cd frontend && npm run dev` | Levanta Vite en `http://localhost:5173` |
 
