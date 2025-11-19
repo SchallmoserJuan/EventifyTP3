@@ -49,6 +49,7 @@ VITE_API_URL=http://localhost:4000/api
 | `cd backend && npm install` | Instala dependencias de la API |
 | `cd backend && npm run dev` | Arranca Express + MongoDB |
 | `cd backend && npm run seed` | Ejecuta el seed existente (opcional) |
+| `cd backend && npm test`     | Corre pruebas Jest (usa MongoDB en memoria) |
 | `cd frontend && npm install` | Instala dependencias del cliente |
 | `cd frontend && npm run dev` | Levanta Vite en `http://localhost:5173` |
 
