@@ -6,6 +6,8 @@ import Employees from "./pages/Employees.jsx";
 import EmployeeEdit from "./pages/EmployeeEdit.jsx";
 import Tasks from "./pages/Tasks.jsx";
 import TaskEdit from "./pages/TaskEdit.jsx";
+import Events from "./pages/Events.jsx";
+import EventEdit from "./pages/EventEdit.jsx";
 import Login from "./pages/Login.jsx";
 
 function LayoutWrapper() {
@@ -29,6 +31,9 @@ function App() {
           <Route path="/tareas" element={<Tasks />} />
           <Route path="/tareas/nueva" element={<TaskEdit mode="create" />} />
           <Route path="/tareas/:id" element={<TaskEdit mode="edit" />} />
+          <Route path="/eventos" element={<Events />} />
+          <Route path="/eventos/nuevo" element={<EventEdit mode="create" />} />
+          <Route path="/eventos/:id" element={<EventEdit mode="edit" />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

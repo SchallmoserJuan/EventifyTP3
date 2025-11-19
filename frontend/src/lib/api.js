@@ -38,3 +38,11 @@ export const tareasApi = {
   update: (id, payload) => api.put(`/tareas/${id}`, payload).then((res) => res.data.data),
   remove: (id) => api.delete(`/tareas/${id}`),
 };
+
+export const eventsApi = {
+  list: () => api.get("/eventos").then((res) => res.data.data),
+  get: (id) => api.get(`/eventos/${id}`).then((res) => res.data.data),
+  create: (payload) => api.post("/eventos", payload).then((res) => res.data.data),
+  update: (id, payload) => api.put(`/eventos/${id}`, payload).then((res) => res.data.data),
+  remove: (id) => api.delete(`/eventos/${id}`),
+};

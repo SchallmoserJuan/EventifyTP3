@@ -58,8 +58,8 @@ export async function getTarea(req, res) {
 export async function getTareaFormOptions(_req, res) {
   try {
     const [empleados, eventos] = await Promise.all([
-      Empleado.find({ activo: true }).select("nombre"),
-      Evento.find({ activo: true }).select("nombre"),
+      Empleado.find({ activo: { $nin: [false, "false", 0] } }).select("nombre"),
+      Evento.find({ activo: { $nin: [false, "false", 0] } }).select("nombre"),
     ]);
     res.json({
       empleados,

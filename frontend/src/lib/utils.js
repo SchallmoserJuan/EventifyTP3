@@ -24,3 +24,11 @@ export const defaultTask = {
   horasEstimadas: 1,
   horasReales: 0,
 };
+
+export const defaultEvent = {
+  nombre: "",
+  descripcion: "",
+  fecha: "",
+  lugar: "",
+  cliente: "",
+};

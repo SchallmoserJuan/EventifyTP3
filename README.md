@@ -1,6 +1,6 @@
 # Eventify v3
 
-Aplicacion de gestion de eventos con backend Node.js + Express + MongoDB y un frontend separado construido con React + Vite + Tailwind CSS (glassmorphism + Framer Motion).
+Aplicación de gestión de eventos con backend Node.js + Express + MongoDB y un frontend moderno construido con React + Vite + Tailwind CSS.
 
 ## Arquitectura
 
@@ -8,27 +8,27 @@ Aplicacion de gestion de eventos con backend Node.js + Express + MongoDB y un fr
 EventifyTP3/
 ├── backend/                # API REST
 │   ├── src/
-│   │   ├── config/         # Conexion a MongoDB
-│   │   ├── controllers/    # CRUD + auth
+│   │   ├── config/         # Conexión a MongoDB
+│   │   ├── controllers/    # CRUD + auth (empleados, tareas, eventos)
 │   │   ├── middleware/     # authGuard y authorizeRoles
-│   │   ├── models/         # Mongoose (empleados, tareas, usuarios, etc.)
-│   │   ├── routes/         # /api/auth, /api/empleados, /api/tareas
+│   │   ├── models/         # Mongoose (empleados, tareas, eventos, usuarios)
+│   │   ├── routes/         # /api/auth, /api/empleados, /api/tareas, /api/eventos
 │   │   └── server.js       # Bootstrap de Express
 │   ├── package.json
 │   └── .env                # PORT, MONGODB_URI, JWT_SECRET, FRONTEND_URL...
 └── frontend/               # UI React + Tailwind
     ├── src/
-    │   ├── components/     # Layout, UI reutilizable, animaciones
+    │   ├── components/     # Layout, UI glassmorphism, animaciones
     │   ├── context/        # AuthProvider (JWT)
     │   ├── lib/            # Axios + helpers
-    │   └── pages/          # Dashboard, Login, CRUDs
+    │   └── pages/          # Dashboard, Login, CRUDs (empleados/tareas/eventos)
     ├── package.json
     └── .env                # VITE_API_URL
 ```
 
 ## Variables de entorno
 
-`backend/.env`:
+`backend/.env`
 ```env
 PORT=4000
 MONGODB_URI=mongodb+srv://...
@@ -37,45 +37,39 @@ JWT_SECRET=pon-tu-secreto-aqui
 JWT_EXPIRES_IN=4h
 ```
 
-`frontend/.env`:
+`frontend/.env`
 ```env
 VITE_API_URL=http://localhost:4000/api
 ```
 
-## Scripts
+## Scripts principales
 
-| Comando | Descripcion |
+| Comando | Descripción |
 | --- | --- |
 | `cd backend && npm install` | Instala dependencias de la API |
 | `cd backend && npm run dev` | Arranca Express + MongoDB |
+| `cd backend && npm run seed` | Ejecuta el seed existente (opcional) |
 | `cd frontend && npm install` | Instala dependencias del cliente |
 | `cd frontend && npm run dev` | Levanta Vite en `http://localhost:5173` |
-| `cd backend && npm run seed` | Ejecuta el seed existente (opcional) |
 
-## Seguridad (JWT + roles)
+## API y seguridad
 
-- Endpoints disponibles en `/api/auth`:
-  - `POST /login` – recibe `{ email, password }` y devuelve `{ token, user }`.
-  - `POST /register` – crea usuario (primer registro obtiene rol `admin` automaticamente). El resto se crea como `viewer` salvo que el request venga autenticado como admin.
-  - `GET /me` – devuelve el perfil autenticado.
-- Middleware `authGuard` protege `/api/empleados` y `/api/tareas`. El token se envia en el header `Authorization: Bearer <token>`.
-- `authorizeRoles` aplica reglas: por ejemplo solo `admin` puede eliminar empleados/tareas, mientras que `viewer` puede listar.
-- Usuarios se almacenan en `src/models/User.js` con contraseñas hasheadas (`bcryptjs`).
-
-### Flujo sugerido
-1. Arranca la API y realiza `POST /api/auth/register` con los datos del primer usuario (quedara como admin). Puedes hacerlo desde Thunder Client/Postman o creando temporalmente un formulario.
-2. Inicia sesion desde `http://localhost:5173/login`. El frontend guarda el JWT en `localStorage` y lo adjunta automaticamente en todas las llamadas `axios`.
-3. Desde el header puedes cerrar sesion y ver el rol actual.
+- **Auth** (`/api/auth`): `POST /register`, `POST /login`, `GET /me`. Primer registro queda como `admin`. JWT firmado con `JWT_SECRET`.
+- **Empleados** (`/api/empleados`): CRUD completo + `/options`. Protegido por `authGuard` y `authorizeRoles` (viewer solo lectura, manager crea/edita, admin también elimina).
+- **Tareas** (`/api/tareas`): CRUD con filtros (`estado`, `prioridad`, `empleado`, `evento`) y `/options` para popular formularios.
+- **Eventos** (`/api/eventos`): nuevo módulo CRUD para calendarizar eventos; se utiliza en el select de tareas.
+- Para consumir la API necesitas enviar `Authorization: Bearer <token>`; el frontend lo hace automáticamente vía `AuthProvider`.
 
 ## Frontend
 
-- Enrutamiento protegido con `ProtectedRoute` (react-router-dom). Toda la app (dashboard, empleados, tareas) queda bajo `<AuthProvider>` + `<Layout>` y exige JWT valido.
-- UI modernizada: componentes personalizados (botones gradiente, tablas glass, cards con hover), `lucide-react` para iconos y `framer-motion` para transiciones.
-- Formularios controlados con React Hook Form + Zod (validaciones en el cliente) y feedback instantaneo con `sonner`.
+- React Router con `ProtectedRoute` asegura que todo el panel (dashboard, empleados, tareas, eventos) requiera login.
+- React Query coordina llamadas a la API; React Hook Form + Zod validan formularios.
+- Tailwind + componentes custom (botones gradiente, tablas glass, cards animadas) + `framer-motion`/`lucide-react`.
+- Cada módulo respeta los permisos por rol (los viewers solo ven, managers crean/editar, admin borra).
 
-## Resumen de migracion
+## Resumen de migración
 
-1. Se eliminó Pug y se separaron capas backend/frontend.
-2. Se añadieron controladores JSON para empleados y tareas reutilizando la logica original (soft delete, validaciones, populate).
-3. Se construyó el frontend con Vite + Tailwind replicando las vistas (dashboard, listados, formularios, filtros) con componentes reutilizables.
-4. Se integró autenticacion/rol basado en JWT para proteger la API y el panel.
+1. Se eliminó Pug y se separaron las capas backend/frontend.
+2. Se reescribieron los controladores para servir JSON y se añadió autenticación JWT + roles.
+3. Se construyó el frontend con Vite + Tailwind replicando los CRUDs (empleados, tareas) y **se añadió el CRUD completo de eventos**.
+4. Se integró la autenticación/autoridad en toda la UI, se modernizó el diseño y se documentó el proceso para deploy (Render) con variables de entorno claras.

@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import "./config/database.js";
 import empleadoRoutes from "./routes/empleado.routes.js";
 import tareaRoutes from "./routes/tarea.routes.js";
+import eventoRoutes from "./routes/evento.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import { authGuard } from "./middleware/authMiddleware.js";
 
@@ -39,6 +40,7 @@ app.get("/", (_req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/empleados", authGuard, empleadoRoutes);
 app.use("/api/tareas", authGuard, tareaRoutes);
+app.use("/api/eventos", authGuard, eventoRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: `Ruta ${req.path} no encontrada` });

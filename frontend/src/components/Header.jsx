@@ -6,6 +6,7 @@ const links = [
   { to: "/", label: "Dashboard" },
   { to: "/empleados", label: "Empleados" },
   { to: "/tareas", label: "Tareas" },
+  { to: "/eventos", label: "Eventos" },
 ];
 
 function Header() {
