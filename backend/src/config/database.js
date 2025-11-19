@@ -13,7 +13,6 @@ class Database {
             await mongoose.connect(process.env.MONGODB_URI);
             console.log(' Conectado a MongoDB Atlas exitosamente!');
             
-            // Event listeners para monitorear la conexión
             mongoose.connection.on('error', (error) => {
                 console.error(' Error de MongoDB:', error);
             });

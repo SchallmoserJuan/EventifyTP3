@@ -25,7 +25,7 @@ const pickEmpleadoPayload = (body) => ({
 const activeFilter = {
   $or: [
     { activo: { $exists: false } },
-    { activo: { $nin: [false, "false", 0] } }, // cualquiera que no sea false
+    { activo: { $nin: [false, "false", 0] } },
   ],
 };
 

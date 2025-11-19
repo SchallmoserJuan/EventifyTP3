@@ -5,7 +5,7 @@ const rolSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        enum: ['administrador', 'planner', 'coordinador'] // Solo estos valores permitidos
+        enum: ['administrador', 'planner', 'coordinador'] 
     },
     descripcion: {
         type: String,

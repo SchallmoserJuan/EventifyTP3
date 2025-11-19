@@ -1,14 +1,14 @@
 {
-  "name": "eventifytp2",
-  "version": "1.0.0",
+  "name": "eventifytp3",
+  "version": "3.0.0",
   "description": "",
-  "homepage": "https://github.com/SchallmoserJuan/EventifyTP2#readme",
+  "homepage": "https://github.com/SchallmoserJuan/EventifyTP3#readme",
   "bugs": {
-    "url": "https://github.com/SchallmoserJuan/EventifyTP2/issues"
+    "url": "https://github.com/SchallmoserJuan/EventifyTP3/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SchallmoserJuan/EventifyTP2.git"
+    "url": "git+https://github.com/SchallmoserJuan/EventifyTP3.git"
   },
   "license": "ISC",
   "author": "",

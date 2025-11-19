@@ -11,12 +11,10 @@ async function seedDatabase() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log(" Conectado a MongoDB para poblar datos...");
 
-    // Limpiar datos existentes
     await Rol.deleteMany({});
     await Area.deleteMany({});
     await Evento.deleteMany({});
 
-    // Crear roles
     const roles = await Rol.create([
       {
         nombre: "administrador",
@@ -35,7 +33,6 @@ async function seedDatabase() {
       },
     ]);
 
-    // Crear áreas
     const areas = await Area.create([
       {
         nombre: "Producción y Logística",
@@ -63,7 +60,6 @@ async function seedDatabase() {
     console.log(`✅ ${roles.length} roles creados`);
     console.log(`✅ ${areas.length} áreas creadas`);
 
-    // Precargar 3 eventos random
     const eventos = await Evento.create([
       {
         nombre: "Fiesta Empresarial",
