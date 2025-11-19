@@ -45,7 +45,6 @@ const empleadoSchema = new mongoose.Schema(
   }
 );
 
-empleadoSchema.index({ email: 1 }); 
 empleadoSchema.index({ activo: 1 }); 
 
 empleadoSchema.virtual("nombreCompleto").get(function () {

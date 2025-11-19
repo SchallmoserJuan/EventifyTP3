@@ -11,14 +11,18 @@ class Database {
     async connect() {
         try {
             await mongoose.connect(process.env.MONGODB_URI);
-            console.log(' Conectado a MongoDB Atlas exitosamente!');
+            if (process.env.NODE_ENV !== 'test') {
+                console.log(' Conectado a MongoDB Atlas exitosamente!');
+            }
             
             mongoose.connection.on('error', (error) => {
                 console.error(' Error de MongoDB:', error);
             });
             
             mongoose.connection.on('disconnected', () => {
-                console.log(' MongoDB desconectado');
+                if (process.env.NODE_ENV !== 'test') {
+                    console.log(' MongoDB desconectado');
+                }
             });
             
         } catch (error) {
