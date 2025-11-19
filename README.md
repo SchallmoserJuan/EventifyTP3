@@ -1,6 +1,7 @@
 # Eventify v3
 
-Aplicación de gestión de eventos con backend Node.js + Express + MongoDB y un frontend moderno construido con React + Vite + Tailwind CSS.
+<img width="3780" height="1890" alt="White and Grey Simple Thank You Banner" src="https://github.com/user-attachments/assets/43adf4ba-ed93-4df8-8a39-ac31b9201fa6" />
+
 
 ## Arquitectura
 
