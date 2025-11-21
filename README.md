@@ -34,7 +34,7 @@ EventifyTP3/
 PORT=4000
 MONGODB_URI=mongodb+srv://...
 FRONTEND_URL=http://localhost:5173
-JWT_SECRET=pon-tu-secreto-aqui
+JWT_SECRET=clave-jwt-secreta
 JWT_EXPIRES_IN=4h
 ```
 
