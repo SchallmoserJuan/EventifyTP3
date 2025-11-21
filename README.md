@@ -64,13 +64,23 @@ La prueba levanta una base MongoDB en memoria, por lo que no requiere datos real
 
 ```bash
 cd backend
-npm install        # si aún no instalaste devDependencies
+npm install
 npm test
 ```
 
 Esto deja documentado el uso de prácticas de testing vistas en clase (Jest) y respalda el correcto funcionamiento del flujo de autenticación.
 | `cd frontend && npm install` | Instala dependencias del cliente |
 | `cd frontend && npm run dev` | Levanta Vite en `http://localhost:5173` |
+
+## Demo
+- App: https://app-eventify.onrender.com
+- Api: https://api-eventify.onrender.com
+  
+```bash
+- Autenticación de prueba:
+- Mail: admin@mail.com
+- Contraseña: secreto
+```
 
 ## API y seguridad
 
